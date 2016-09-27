@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Kickstarter React</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+
+    <div id="content"></div>
+    <div id="component1"></div>
+    <div id="search"></div>
+    <div id="number"></div>
+    <div id="coffee"></div>
+    <div id="coffee_menu"></div>
+
+    <script type="text/babel" src="scripts/example.js"></script>
+    <script type="text/babel">
+
+      class Welcome extends React.Component {
+        render() {
+          const age = 23
+          return <b>Welcome {this.props.name}! Age: {age}</b>
+        }
+      }
+
+      class Search extends React.Component {
+        render() {
+          return <div>
+                  <input type="text" placeholder="hello Component"/>
+                  <button>Search</button>
+                 </div>
+        }
+      }
+
+      class Number extends React.Component {
+        render() {
+          let x = "odd"
+          if(this.props.value % 2 == 0) {x = "even"}
+          return <i>The number {this.props.value} is {x}</i>
+        }
+      }
+
+      class Coffee extends React.Component {
+        render() {
+          let data = ['Mocha','Latte','Espresso']
+          let item = []
+          for (let i = 0; i < data.length; i++  ) {
+            item.push(<li>{data[i]}</li>)
+          }
+          return <ul>{item}</ul>
+        }
+      }
+
+      class CoffeeMenu extends React.Component {
+        render() {
+          let data = this.props.list.split(',')
+          // let data = ['Mocha','Latte','Espresso']
+          let item = []
+          for(let v of data) {
+            item.push(<button className='btn btn-primary'>{v}</button>)
+          }
+          return <ul>{item}</ul>
+        }
+      }
+
+      ReactDOM.render(<CoffeeMenu list='Espresso, Mocha, Latte' />, document.getElementById('coffee_menu'))
+
+      ReactDOM.render(<Coffee />, document.getElementById('coffee'))
+
+      ReactDOM.render(<Number value='7'/>, document.getElementById('number'))
+
+      ReactDOM.render(<Search />, document.getElementById('search'))
+
+      ReactDOM.render(<Welcome name='SirGuys' />, document.getElementById('component1'))
+
+      ReactDOM.render(
+        <div>
+          <p>
+            <i>Hello React</i>
+            <i>My name is SirGuys</i>
+          </p>
+
+          <from>
+            <input type="text" placeholder="Search"/>
+            <input type="submit" value='send'/>
+          </from>
+
+          </div>
+
+        ,document.getElementById('content'))
+
+    </script>
+  </body>
+</html>

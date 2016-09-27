@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Kickstarter React</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+
+    <div id="content" class="container"></div>
+
+
+    <script type="text/babel" src="scripts/example.js"></script>
+    <script type="text/babel">
+
+    class CoffeeList extends React.Component {
+        constructor() {
+          super()
+          this.data = [ ]
+          fetch('http://icode.run:4000/table')
+          .then( r => r.json() )
+          .then( x => {
+            this.data = x
+            this.setState({}) //คล้ายสั่งให้รีเฟรช
+          })
+        }
+        render() {
+          let button = [ ]
+          for (let v of this.data) {
+            button.push(<button className='btn btn-primary'>
+              {v.name} - {v.price}</button>)
+          }
+          return <div className='btn-group'>{button}</div>
+        }
+      }
+
+      ReactDOM.render(<CoffeeList />, document.getElementById('content'))
+
+    </script>
+  </body>
+</html>
